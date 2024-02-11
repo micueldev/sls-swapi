@@ -1,12 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsArray,
-  IsPositive,
-  IsString,
-  IsUUID,
-  Matches,
-  MinLength,
-} from 'class-validator';
+import { IsArray, IsString, IsUUID, Matches, MinLength } from 'class-validator';
 import { FilmId } from 'src/modules/shared/domain/film-id';
 import { PlanetId } from 'src/modules/shared/domain/planet-id';
 import { VehicleId } from 'src/modules/shared/domain/vehicle-id';
@@ -65,7 +58,7 @@ export class CreateCharacterBodyDto {
     nullable: false,
     required: true,
   })
-  @IsPositive()
+  @IsString()
   readonly altura: string;
 
   @ApiProperty({
@@ -74,7 +67,7 @@ export class CreateCharacterBodyDto {
     nullable: false,
     required: true,
   })
-  @IsPositive()
+  @IsString()
   readonly peso: string;
 
   @ApiProperty({
@@ -114,9 +107,9 @@ export class CreateCharacterBodyDto {
     required: true,
   })
   @Matches(PlanetId.VALID_REGEX, {
-    message: 'planetId is invalid',
+    message: 'planeta_natal is invalid',
   })
-  readonly identificador_de_planeta: string;
+  readonly planeta_natal: string;
 
   @ApiProperty({
     type: Array,

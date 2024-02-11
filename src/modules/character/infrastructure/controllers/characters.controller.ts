@@ -56,7 +56,7 @@ export class CharactersController {
         createCharacterBody.color_de_ojos,
         createCharacterBody.color_de_cabello,
         createCharacterBody.color_de_piel,
-        createCharacterBody.identificador_de_planeta,
+        createCharacterBody.planeta_natal,
         createCharacterBody.peliculas,
         createCharacterBody.vehiculos,
       ),

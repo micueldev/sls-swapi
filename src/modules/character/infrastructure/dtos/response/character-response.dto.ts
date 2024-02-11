@@ -1,6 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { CharacterOutput } from 'src/modules/character/application/dtos/character.output';
 
+import { SWAPI_URL } from '../../providers/swapi-external-character.provider';
+
 export class CharacterResponseDto {
   @ApiProperty({
     type: String,
@@ -67,21 +69,21 @@ export class CharacterResponseDto {
 
   @ApiProperty({
     type: String,
-    example: '2323',
+    example: '"https://swapi.py4e.com/api/planets/1/',
     nullable: false,
   })
-  readonly identificador_de_planeta: string;
+  readonly planeta_natal: string;
 
   @ApiProperty({
     type: Array,
-    example: ['3422'],
+    example: ['https://swapi.py4e.com/api/films/7/'],
     nullable: false,
   })
   readonly peliculas: Array<string>;
 
   @ApiProperty({
     type: Array,
-    example: ['3422'],
+    example: ['https://swapi.py4e.com/api/vehicles/14/'],
     nullable: false,
   })
   readonly vehiculos: Array<string>;
@@ -97,9 +99,21 @@ export class CharacterResponseDto {
       color_de_ojos: characterOutput.eyeColor,
       color_de_cabello: characterOutput.hairColor,
       color_de_piel: characterOutput.skinColor,
-      identificador_de_planeta: characterOutput.planetId,
-      peliculas: characterOutput.films,
-      vehiculos: characterOutput.vehicles,
+      planeta_natal: getPlanetUrl(characterOutput.planetId),
+      peliculas: characterOutput.films.map(getFilmUrl),
+      vehiculos: characterOutput.vehicles.map(getVehicleUrl),
     };
   }
+}
+
+function getPlanetUrl(planetId: string): string {
+  return `${SWAPI_URL}/planets/${planetId}/`;
+}
+
+function getFilmUrl(filmId: string): string {
+  return `${SWAPI_URL}/films/${filmId}/`;
+}
+
+function getVehicleUrl(vehicleId: string): string {
+  return `${SWAPI_URL}/vehicles/${vehicleId}/`;
 }

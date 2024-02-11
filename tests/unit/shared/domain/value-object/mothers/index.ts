@@ -1,6 +1,7 @@
 export { DateMother } from './date.Mother';
 export { EmailMother } from './email.mother';
 export { EnumMother } from './enum.Mother';
+export { FloatMother } from './float.mother';
 export { IntegerMother } from './integer.Mother';
 export { ObjectMother } from './object.mother';
 export { StringMother } from './string.Mother';

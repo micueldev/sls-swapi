@@ -4,7 +4,7 @@ import { Uuid } from 'src/modules/shared/domain/value-object/uuid';
 import { Character } from '../../domain/character';
 import { ExternalCharacterProvider } from '../../domain/external-character.provider';
 
-export const SWAPI_URL = process.env.SWAPI_URL?.replace(/[\\\s]+$/, '');
+export const SWAPI_URL = process.env.SWAPI_URL?.replace(/[\/\s]+$/, '');
 
 const REGEX_ID = /(^[\w\W]+\/(?=[\d]+\/$)|\/$)/g;
 
@@ -32,7 +32,9 @@ export class SwapiExternalCharacterProvider
 {
   private readonly logger = new Logger(SwapiExternalCharacterProvider.name);
 
-  async getCharacterByExternalId(externalId: string): Promise<Character | null> {
+  async getCharacterByExternalId(
+    externalId: string,
+  ): Promise<Character | null> {
     let character = null;
     try {
       const response = await fetch(`${SWAPI_URL}/people/${externalId}/`);

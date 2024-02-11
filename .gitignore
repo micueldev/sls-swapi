@@ -37,4 +37,3 @@ lerna-debug.log*
 # Serverless directories
 .serverless
 .build
-src/**/*.js
