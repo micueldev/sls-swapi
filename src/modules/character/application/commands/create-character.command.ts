@@ -4,8 +4,8 @@ export class CreateCharacterCommand {
     private readonly name: string,
     private readonly birthYear: string,
     private readonly gender: string,
-    private readonly height: number,
-    private readonly mass: number,
+    private readonly height: string,
+    private readonly mass: string,
     private readonly eyeColor: string,
     private readonly hairColor: string,
     private readonly skinColor: string,
@@ -30,11 +30,11 @@ export class CreateCharacterCommand {
     return this.gender;
   }
 
-  public getHeight(): number {
+  public getHeight(): string {
     return this.height;
   }
 
-  public getMass(): number {
+  public getMass(): string {
     return this.mass;
   }
 

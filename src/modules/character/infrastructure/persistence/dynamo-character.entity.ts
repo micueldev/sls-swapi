@@ -5,8 +5,8 @@ export interface DynamoCaracterEntityProps {
   name: string;
   birthYear: string;
   gender: string;
-  height: number;
-  mass: number;
+  height: string;
+  mass: string;
   eyeColor: string;
   hairColor: string;
   skinColor: string;
@@ -27,7 +27,7 @@ export class DynamoCharacterEntity {
   static ToCharacter(entity: DynamoCaracterEntityProps): Character {
     return Character.fromPrimitives({
       ...entity,
-      externalId: entity.externalId !== 'undefinded' ? entity.externalId : null,
+      externalId: entity.externalId !== 'undefined' ? entity.externalId : null,
     });
   }
 }

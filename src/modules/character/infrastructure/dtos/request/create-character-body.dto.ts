@@ -60,22 +60,22 @@ export class CreateCharacterBodyDto {
   readonly genero: string;
 
   @ApiProperty({
-    type: Number,
+    type: String,
     example: '123.23',
     nullable: false,
     required: true,
   })
   @IsPositive()
-  readonly altura: number;
+  readonly altura: string;
 
   @ApiProperty({
-    type: Number,
+    type: String,
     example: '34.23',
     nullable: false,
     required: true,
   })
   @IsPositive()
-  readonly peso: number;
+  readonly peso: string;
 
   @ApiProperty({
     type: String,

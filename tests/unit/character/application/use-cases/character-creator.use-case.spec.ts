@@ -8,10 +8,7 @@ describe('CharacterCreator UseCase', () => {
   const characterCreator = new CharacterCreator(characterRepository);
 
   it('should save the character', async () => {
-    // const date = new Date();
-    // jest.spyOn(global, 'Date').mockImplementation(() => date);
-
-    const character = CharacterMother.random();
+    const character = CharacterMother.create({ externalId: null });
 
     const characterCreated = await characterCreator.run(
       character.getId(),

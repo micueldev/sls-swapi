@@ -4,6 +4,7 @@ import { PlanetIdMother } from 'tests/unit/shared/domain/mothers/planet-id.mothe
 import { VehicleIdMother } from 'tests/unit/shared/domain/mothers/vehicle-id.mother';
 
 import { CharacterBirthYearMother } from './character-birth-year.mother';
+import { CharacterExternalIdMother } from './character-external-id.mother';
 import { CharacterEyeColorMother } from './character-eye-color.mother';
 import { CharacterGenderMother } from './character-gender.mother';
 import { CharacterHairColorMother } from './character-hair-color.mother';
@@ -27,19 +28,21 @@ export class CharacterMother {
     planetId = PlanetIdMother.randomValue(),
     films = [FilmIdMother.randomValue()],
     vehicles = [VehicleIdMother.randomValue()],
+    externalId = CharacterExternalIdMother.randomValue(),
   }: {
     id?: string;
     name?: string;
     birthYear?: string;
     gender?: string;
-    height?: number;
-    mass?: number;
+    height?: string;
+    mass?: string;
     eyeColor?: string;
     hairColor?: string;
     skinColor?: string;
     planetId?: string;
     films?: Array<string>;
     vehicles?: Array<string>;
+    externalId?: string;
   }) {
     return Character.fromPrimitives({
       id,
@@ -54,6 +57,7 @@ export class CharacterMother {
       planetId,
       films,
       vehicles,
+      externalId,
     });
   }
 
@@ -71,6 +75,7 @@ export class CharacterMother {
       planetId: PlanetIdMother.random(),
       films: [FilmIdMother.random()],
       vehicles: [VehicleIdMother.random()],
+      externalId: null,
     });
   }
 }

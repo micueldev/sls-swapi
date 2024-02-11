@@ -6,7 +6,7 @@ export class CharacterMassMother {
     return new CharacterMass(this.randomValue());
   }
 
-  static randomValue(): number {
-    return FloatMother.random({ min: 1 });
+  static randomValue(): string {
+    return FloatMother.random({ min: 1 }).toString();
   }
 }

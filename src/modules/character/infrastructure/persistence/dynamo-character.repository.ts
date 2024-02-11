@@ -14,7 +14,7 @@ import {
   DynamoCharacterEntity,
 } from './dynamo-character.entity';
 
-const CHARACTERS_TABLE_NAME = process.env.CHARACTERS_TABLE_NAME;
+export const CHARACTERS_TABLE_NAME = process.env.CHARACTERS_TABLE_NAME;
 
 export class DynamoCharacterRepository implements CharacterRepository {
   constructor(
@@ -67,7 +67,7 @@ export class DynamoCharacterRepository implements CharacterRepository {
     return character;
   }
 
-  async findCharacterByExternalId(
+  private async findCharacterByExternalId(
     externalId: string,
   ): Promise<Character | null> {
     let character = null;
@@ -91,7 +91,9 @@ export class DynamoCharacterRepository implements CharacterRepository {
 
     if (!character) {
       character =
-        await this.externalCharacterProvider.getCharacterById(externalId);
+        await this.externalCharacterProvider.getCharacterByExternalId(
+          externalId,
+        );
       if (character) {
         await this.createCharacter(character);
       }

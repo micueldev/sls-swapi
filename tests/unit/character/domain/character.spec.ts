@@ -5,6 +5,7 @@ import { VehicleIdMother } from 'tests/unit/shared/domain/mothers/vehicle-id.mot
 
 import { CharacterMother } from './mothers/character.mother';
 import { CharacterBirthYearMother } from './mothers/character-birth-year.mother';
+import { CharacterExternalIdMother } from './mothers/character-external-id.mother';
 import { CharacterEyeColorMother } from './mothers/character-eye-color.mother';
 import { CharacterGenderMother } from './mothers/character-gender.mother';
 import { CharacterHairColorMother } from './mothers/character-hair-color.mother';
@@ -29,6 +30,7 @@ describe('Character test', () => {
       planetId: PlanetIdMother.randomValue(),
       films: [FilmIdMother.randomValue(), FilmIdMother.randomValue()],
       vehicles: [VehicleIdMother.randomValue(), VehicleIdMother.randomValue()],
+      externalId: CharacterExternalIdMother.randomValue(),
     };
 
     expect(

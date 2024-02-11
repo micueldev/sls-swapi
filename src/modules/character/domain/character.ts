@@ -19,8 +19,8 @@ interface CharacterPrimitiveProps {
   name: string;
   birthYear: string;
   gender: string;
-  height: number;
-  mass: number;
+  height: string;
+  mass: string;
   eyeColor: string;
   hairColor: string;
   skinColor: string;
@@ -202,11 +202,11 @@ export class Character extends AggregateRoot {
     return this.gender.value;
   }
 
-  getHeight(): number {
+  getHeight(): string {
     return this.height.value;
   }
 
-  getMass(): number {
+  getMass(): string {
     return this.mass.value;
   }
 

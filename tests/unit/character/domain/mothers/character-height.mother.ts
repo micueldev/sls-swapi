@@ -6,7 +6,7 @@ export class CharacterHeightMother {
     return new CharacterHeight(this.randomValue());
   }
 
-  static randomValue(): number {
-    return FloatMother.random({ min: 1 });
+  static randomValue(): string {
+    return FloatMother.random({ min: 1 }).toString();
   }
 }

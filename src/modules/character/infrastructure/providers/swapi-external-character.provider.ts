@@ -1,7 +1,10 @@
+import { Logger } from '@nestjs/common';
 import { Uuid } from 'src/modules/shared/domain/value-object/uuid';
 
 import { Character } from '../../domain/character';
 import { ExternalCharacterProvider } from '../../domain/external-character.provider';
+
+export const SWAPI_URL = process.env.SWAPI_URL?.replace(/[\\\s]+$/, '');
 
 const REGEX_ID = /(^[\w\W]+\/(?=[\d]+\/$)|\/$)/g;
 
@@ -27,12 +30,12 @@ interface CharacterResponse {
 export class SwapiExternalCharacterProvider
   implements ExternalCharacterProvider
 {
-  async getCharacterById(externalId: string): Promise<Character | null> {
+  private readonly logger = new Logger(SwapiExternalCharacterProvider.name);
+
+  async getCharacterByExternalId(externalId: string): Promise<Character | null> {
     let character = null;
     try {
-      const response = await fetch(
-        `https://swapi.py4e.com/api/people/${externalId}/`,
-      );
+      const response = await fetch(`${SWAPI_URL}/people/${externalId}/`);
       if (response.ok) {
         const body: CharacterResponse = await response.json();
         character = Character.fromPrimitives({
@@ -40,8 +43,8 @@ export class SwapiExternalCharacterProvider
           name: body.name,
           birthYear: body.birth_year,
           gender: body.gender,
-          height: +body.height,
-          mass: +body.mass,
+          height: body.height,
+          mass: body.mass,
           eyeColor: body.eye_color,
           hairColor: body.hair_color,
           skinColor: body.skin_color,
@@ -50,11 +53,15 @@ export class SwapiExternalCharacterProvider
           vehicles: body.vehicles.map((vehicle) =>
             vehicle.replace(REGEX_ID, ''),
           ),
-          externalId: externalId,
+          externalId,
         });
       }
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      this.logger.error(
+        error.message,
+        error.stack,
+        `function get with param: ${externalId}`,
+      );
     } finally {
       return character;
     }

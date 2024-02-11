@@ -5,5 +5,5 @@ export const EXTERNAL_CHARACTER_PROVIDER_ALIAS = Symbol(
 );
 
 export interface ExternalCharacterProvider {
-  getCharacterById(externalId: string): Promise<Character | null>;
+  getCharacterByExternalId(externalId: string): Promise<Character | null>;
 }

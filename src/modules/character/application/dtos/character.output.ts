@@ -3,8 +3,8 @@ export interface CharacterOutput {
   name: string;
   birthYear: string;
   gender: string;
-  height: number;
-  mass: number;
+  height: string;
+  mass: string;
   eyeColor: string;
   hairColor: string;
   skinColor: string;

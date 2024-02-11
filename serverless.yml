@@ -6,6 +6,13 @@ plugins:
   - serverless-offline
   - serverless-offline-watcher
 
+package:
+  patterns:
+    - '!resources/**'
+    - '!iam/**'
+    - '!tests/**'
+    - '!offline/**'
+
 provider:
   name: aws
   region: us-east-1
@@ -16,6 +23,7 @@ provider:
   environment:
     NODE_ENV: ${sls:stage}
     CHARACTERS_TABLE_NAME: ${self:custom.CharactersTable.name}
+    SWAPI_URL: 'https://swapi.py4e.com/api/'
   iam:
     role:
       statements:
