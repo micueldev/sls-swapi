@@ -1,0 +1,52 @@
+service: sls-swapi
+
+frameworkVersion: "3"
+
+plugins:
+  - serverless-offline
+  - serverless-offline-watcher
+
+provider:
+  name: aws
+  region: us-east-1
+  runtime: nodejs20.x
+  stage: ${opt:stage, 'dev'}
+  memorySize: 256
+  timeout: 6
+  environment:
+    NODE_ENV: ${sls:stage}
+    CHARACTERS_TABLE_NAME: ${self:custom.CharactersTable.name}
+  iam:
+    role:
+      statements:
+        - ${file(iam/CharactersTableIAM.yml):CharactersTableIAM}
+
+resources:
+  Resources:
+    CharactersTable: ${file(resources/CharactersTable.yml):CharactersTable}
+
+custom:
+  CharactersTable:
+    name: 'characters-table-${sls:stage}'
+    arn: !GetAtt CharactersTable.Arn
+  serverless-offline:
+    httpPort: 3000
+  serverless-offline-watcher:
+    - path:
+        - src/**/*
+      command: echo "dist folder was modified!"
+      hook:
+        - offline:functionsUpdated
+
+functions:
+  main:
+    handler: dist/lambda.handler
+    events:
+      - http:
+          path: /{proxy+}
+          method: ANY
+          cors: true
+      - http:
+          path: /
+          method: ANY
+          cors: true
