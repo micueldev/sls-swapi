@@ -12,6 +12,7 @@ package:
     - '!iam/**'
     - '!tests/**'
     - '!offline/**'
+    - '!images/**'
 
 provider:
   name: aws
